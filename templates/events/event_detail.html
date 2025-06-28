@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ event.title }}{% endblock %}
+{% block content %}
+<h2>{{ event.title }}</h2>
+<p>{{ event.description }}</p>
+<p><strong>Date:</strong> {{ event.date|date:"M d, Y H:i" }}</p>
+
+{% if user.is_authenticated %}
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+{% else %}
+  <p><a href="{% url 'login' %}">Login</a> to register.</p>
+{% endif %}
+
+<a href="{% url 'event_list' %}" class="btn btn-secondary mt-3">Back to Events</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}All Events{% endblock %}
+{% block content %}
+<h2>Upcoming Events</h2>
+{% for ev in events %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h4>{{ ev.title }}</h4>
+      <p>{{ ev.date|date:"M d, Y H:i" }}</p>
+      <a href="{% url 'event_detail' ev.id %}" class="btn btn-info">View Details</a>
+    </div>
+  </div>
+{% empty %}
+  <p>No events found.</p>
+{% endfor %}
+{% endblock %}

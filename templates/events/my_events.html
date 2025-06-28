@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Events</h2>
+<a href="{% url 'event_create' %}" class="btn btn-success mb-3">Create New Event</a>
+{% for ev in events %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>{{ ev.title }}</h5>
+      <p>{{ ev.date|date:"M d, Y H:i" }}</p>
+      <a href="{% url 'event_detail' ev.pk %}" class="btn btn-info">View</a>
+      <a href="{% url 'event_edit' ev.pk %}" class="btn btn-warning">Edit</a>
+      <a href="{% url 'event_delete' ev.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+{% empty %}
+  <p>You have not created any events yet.</p>
+{% endfor %}
+{% endblock %}
