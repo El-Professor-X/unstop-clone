@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Your Registered Events</h2>
-{% for reg in regs %}
-  <div class="card mb-2">
+{% for reg in registrations %}
+<div class="card mb-3">
     <div class="card-body">
-      <h5>{{ reg.event.title }}</h5>
-      <p>Date: {{ reg.event.date|date:"M d, Y H:i" }}</p>
-      <p>Registered on: {{ reg.registered_on|date:"M d, Y" }}</p>
+        <h5>{{ reg.event.title }}</h5>
+        <p>{{ reg.event.date }}</p>
     </div>
-  </div>
+</div>
 {% empty %}
-  <p>You haven’t registered for any events yet.</p>
+<p>You haven’t registered for any events.</p>
 {% endfor %}
 {% endblock %}
