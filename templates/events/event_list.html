@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>All Events</h2>
-{% for event in events %}
-<div class="card mb-3">
+<h2 class="mb-3">Available Events</h2>
+{% for ev in events %}
+  <div class="card mb-3 shadow-sm">
     <div class="card-body">
-        <h5 class="card-title">{{ event.title }}</h5>
-        <p class="card-text">{{ event.date }}</p>
-        <a href="{% url 'event_detail' event.pk %}" class="btn btn-info">Details</a>
+      <h5 class="card-title">{{ ev.title }}</h5>
+      <p class="card-text">{{ ev.date|date:"M d, Y H:i" }}</p>
+      <a href="{% url 'event_detail' ev.id %}" class="btn btn-primary">View Details</a>
     </div>
-</div>
+  </div>
 {% empty %}
-<p>No events available.</p>
+  <p>No events available.</p>
 {% endfor %}
 {% endblock %}

@@ -1,9 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<h2>{{ event.title }}</h2>
-<p>{{ event.description }}</p>
-<p><strong>Date:</strong> {{ event.date }}</p>
-<form method="post">{% csrf_token %}
-    <button class="btn btn-success">Register</button>
-</form>
+
+<!-- 🔷 Hero Banner -->
+<div class="position-relative">
+  <img src="{{ event.image.url }}" class="img-fluid w-100" style="height: 350px; object-fit: cover;" alt="{{ event.title }}">
+  <div class="position-absolute top-50 start-0 translate-middle-y text-white ps-5">
+    <h1 class="fw-bold display-5">{{ event.title }}</h1>
+  </div>
+</div>
+
+<!-- 🧾 Event Meta Info Cards -->
+<div class="row text-center my-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="text-muted">Date</h6>
+        <p class="fw-semibold">{{ event.date|date:"M d, Y" }} at {{ event.date|date:"H:i A" }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="text-muted">Organizer</h6>
+        <p class="fw-semibold">{{ event.organizer.username }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-body">
+        <h6 class="text-muted">Category</h6>
+        <p class="fw-semibold">General Event</p>  <!-- Optional: Add event.type later -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Register Form CTA -->
+<div class="text-center my-4">
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-lg shadow">Register Now</button>
+  </form>
+</div>
+
+<!-- 📝 Description Card -->
+<div class="card shadow-sm border-0 mb-5">
+  <div class="card-body">
+    <h4 class="mb-3 fw-bold">About the Event</h4>
+    <p style="white-space: pre-line; line-height: 1.8;">{{ event.description }}</p>
+  </div>
+</div>
+
+<a href="{% url 'event_list' %}" class="btn btn-link">← Back to Events</a>
+
 {% endblock %}

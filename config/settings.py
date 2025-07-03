@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['unstop-clone.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['unstop-clone-x87f.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -138,3 +138,9 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+TIME_ZONE = 'Asia/Kolkata'
+USE_TZ = True

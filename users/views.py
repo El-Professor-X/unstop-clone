@@ -1,17 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib import messages
+
 
 def register_view(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)  # Django’s built-in user form
-        if form.is_valid():
-            form.save()  # Save the new user to the database
-            return redirect('login')  # Go to login page after registration
-    else:
-        form = UserCreationForm()
     
-    return render(request, 'users/register.html', {'form': form})
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Account created successfully. Please log in.")
+                return redirect('login')
+            else:
+                messages.error(request, "Something went wrong. Try again.")
+        else:
+            form = UserCreationForm()
+        return render(request, 'users/register.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':

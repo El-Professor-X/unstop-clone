@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Organizer Panel – Your Events</h2>
+
+<a href="{% url 'event_create' %}" class="btn btn-success mb-3">+ Create Event</a>
+
+{% if events %}
+  {% for ev in events %}
+    <div class="card mb-3 shadow-sm">
+      <div class="card-body">
+        <h5>{{ ev.title }}</h5>
+        <p><strong>Date:</strong> {{ ev.date|date:"M d, Y H:i" }}</p>
+        <a href="{% url 'event_edit' ev.id %}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="{% url 'event_delete' ev.id %}" class="btn btn-danger btn-sm">Delete</a>
+      </div>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>You haven’t created any events yet.</p>
+{% endif %}
+{% endblock %}
